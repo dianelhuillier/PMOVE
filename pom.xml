@@ -13,19 +13,9 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
+<!--[INFO] skip non existing resourceDirectory C:\Users\tite_\Desktop\projet4\parkingsystem\src\test\resources directory created-->
 
 	<dependencies>
-	<!-- [INFO] skip non existing resourceDirectory C:\Users\tite_\Desktop\projet4\parkingsystem\src\test\resources -->
-	    <dependency>       
-        <groupId>net.sourceforge.owlapi</groupId>
-        <artifactId>oppl2-oppl2</artifactId>
-        <version>2.1.1</version>
-    </dependency>
-    <dependency>
-        <groupId>net.sourceforge.owlapi</groupId>
-        <artifactId>oppl2-oppl2patterns</artifactId>
-        <version>2.1.1</version>
-    </dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId> 
 			<artifactId>log4j-api</artifactId>
