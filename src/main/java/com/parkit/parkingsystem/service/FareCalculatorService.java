@@ -2,6 +2,9 @@ package com.parkit.parkingsystem.service;
 
 import java.util.Iterator;
 
+import org.joda.time.DateTime;
+import org.joda.time.Duration;
+
 import com.parkit.parkingsystem.constants.Fare;
 import com.parkit.parkingsystem.model.Ticket;
 
@@ -12,16 +15,23 @@ public class FareCalculatorService {
 		if( (ticket.getOutTime() == null) || (ticket.getOutTime().before(ticket.getInTime())) ){
 			throw new IllegalArgumentException("Out time provided is incorrect:"+ticket.getOutTime().toString());
 		}
-		// remplacer int par double ?! genre 1.5h => ca change rien il manque les minutes !!
-		double inHour = ticket.getInTime().getTime(); // changer gethours ? => getTime en ms
-		double outHour = ticket.getOutTime().getTime();
+		DateTime arrivee = new DateTime(ticket.getInTime());
+		DateTime depart = new DateTime(ticket.getOutTime());
+		
+		  double inHour = ticket.getInTime().getTime(); double outHour = ticket.getOutTime().getTime(); 
+		  System.out.println("arrivée " + inHour);
+		  System.out.println("sortie " + outHour); 
+		  System.out.println("diff " + (outHour-inHour));
+		 
+System.out.println("arrivee" + arrivee);
+System.out.println("depart " + depart);
+Duration duree = new Duration (arrivee, depart);
+System.out.println("duree " + duree);
+		//TODO: Some tests are failing here. Need to check if this logic is correct => transformer les minutes en heure
+		double duration = ((outHour - inHour) / ( 60 * 60 * 1000));  
+		System.out.println("la durée en ms " + duration);
 
-
-		//TODO: Some tests are failing here. Need to check if this logic is correct => tranformer les minutes en heure
-		double duration = ((outHour - inHour) / (60 * 60 * 1000)) ;  
-		System.out.println("la durée " + duration);
-
-		if (duration > 50000) {
+		if (duration > 0.5) {  //durée a convertir
 			switch (ticket.getParkingSpot().getParkingType()){
 			case CAR: {
 				//  ticket.setPrice(duration * Fare.CAR_RATE_PER_HOUR);
@@ -35,8 +45,8 @@ public class FareCalculatorService {
 			}
 			default: throw new IllegalArgumentException("Unkown Parking Type");
 			}
-		} else {
-			System.out.println("Less than 30min are free, have a nice day");
+		}else {
 			return duration * Fare.PARK_LESS_THAN_HALF_HOUR;
-		}} 
+		}
+		}  
 }

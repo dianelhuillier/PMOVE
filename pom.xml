@@ -13,11 +13,19 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
-<!--[INFO] skip non existing resourceDirectory C:\Users\tite_\Desktop\projet4\parkingsystem\src\test\resources directory created-->
+	<!--[INFO] skip non existing resourceDirectory C:\Users\tite_\Desktop\projet4\parkingsystem\src\test\resources 
+		directory created -->
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
 		<dependency>
-			<groupId>org.apache.logging.log4j</groupId> 
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.10.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
 			<version>2.14.0</version>
 		</dependency>
@@ -64,7 +72,7 @@
 
 	<build>
 		<plugins>
-		
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
