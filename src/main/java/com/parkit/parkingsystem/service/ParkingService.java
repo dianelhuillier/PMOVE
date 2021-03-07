@@ -49,6 +49,7 @@ public class ParkingService {
 				ticket.setPrice(0);
 				ticket.setInTime(inTime);
 				ticket.setOutTime(null);
+				ticket.setVip(ticketDAO.occurence(null));
 				ticketDAO.saveTicket(ticket);
 				System.out.println("Generated Ticket and saved in DB");
 				System.out.println("Please park your vehicle in spot number:"+parkingSpot.getId());
@@ -65,14 +66,14 @@ public class ParkingService {
 
 
 //TODO REDO VIP 
-	public double vip(String vehicleRegNumber) { 
-		int occurenceDAO = ticketDAO.occurence(vehicleRegNumber);
-		if (occurenceDAO > 3) {  
-			return 0.95;
-		} else { 
-			return 1; 
-		}
-	} 
+//	public double vip(String vehicleRegNumber) { 
+//		int occurenceDAO = ticketDAO.occurence(vehicleRegNumber);
+//		if (occurenceDAO > 3) {  
+//			return 0.95;
+//		} else { 
+//			return 1; 
+//		}
+//	} 
 
 
 
@@ -116,9 +117,8 @@ public class ParkingService {
 
 	public void processExitingVehicle() {
 		try{
-			String vehicleRegNumber = "ABCDEF";
 
-			//String vehicleRegNumber = getVehicleRegNumber();
+			String vehicleRegNumber = getVehicleRegNumber();
 			Ticket ticket = ticketDAO.getTicket(vehicleRegNumber);
 			Date outTime = new Date(System.currentTimeMillis());
 			ticket.setOutTime(outTime);

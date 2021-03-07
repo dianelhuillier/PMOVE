@@ -5,11 +5,12 @@ import com.parkit.parkingsystem.model.Ticket;
 
 
 public class FareCalculatorService {
-
+//
 	public double calculateFare(Ticket ticket){
 		if( (ticket.getOutTime() == null) || (ticket.getOutTime().before(ticket.getInTime())) ){
-			throw new IllegalArgumentException("Out time provided is incorrect:"+ticket.getOutTime().toString());
+			throw new IllegalArgumentException("Out time provided is incorrect:"+ticket.getOutTime().toString() + ticket.getInTime().toString());
 		}
+		
 		
 		double inHour = ticket.getInTime().getTime(); 
 		double outHour = ticket.getOutTime().getTime(); 
@@ -17,7 +18,9 @@ public class FareCalculatorService {
 		double duration = ((outHour - inHour) / ( 60 * 60 * 1000));  
 		System.out.println("la durée en heures " + duration);
 
-		if (duration > 0.5) {  
+		
+		
+		if (duration > 0.5 && ticket.getVip() == 0 ) {  
 			switch (ticket.getParkingSpot().getParkingType()){
 			case CAR: {
 				//  ticket.setPrice(duration * Fare.CAR_RATE_PER_HOUR);
@@ -31,7 +34,23 @@ public class FareCalculatorService {
 			}
 			default: throw new IllegalArgumentException("Unkown Parking Type");
 			}
-		}else {
+			
+		}else if (duration > 0.5 && ticket.getVip() == 1)
+			switch (ticket.getParkingSpot().getParkingType()){
+			case CAR: {
+				//  ticket.setPrice(duration * Fare.CAR_RATE_PER_HOUR);
+				return duration * Fare.CAR_RATE_PER_HOUR * 0.95;
+				//break; 
+			}
+			case BIKE: {
+				//     ticket.setPrice(duration * Fare.BIKE_RATE_PER_HOUR);
+				return duration * Fare.BIKE_RATE_PER_HOUR * 0.95;
+				//      break;
+			}
+			default: throw new IllegalArgumentException("Unkown Parking Type");
+			}
+		
+		{
 			return duration * Fare.PARK_LESS_THAN_HALF_HOUR;
 		}
 	}  

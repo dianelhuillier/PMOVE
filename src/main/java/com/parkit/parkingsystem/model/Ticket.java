@@ -9,7 +9,7 @@ public class Ticket {
     private double price;
     private Date inTime;
     private Date outTime;
-    private boolean vip;
+    private int vip;
 
     public int getId() {
         return id;
@@ -59,11 +59,11 @@ public class Ticket {
         this.outTime = outTime;
     }
 
-	public boolean isVip() {
+	public int getVip() {
 		return vip;
 	}
 
-	public void setVip(boolean vip) {
-		this.vip = vip;
+	public void setVip(int i) {
+		this.vip = i;
 	}
 }

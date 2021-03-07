@@ -33,6 +33,7 @@ public class TicketDAO {
             ps.setDouble(3, ticket.getPrice());
             ps.setTimestamp(4, new Timestamp(ticket.getInTime().getTime()));
             ps.setTimestamp(5, (ticket.getOutTime() == null)?null: (new Timestamp(ticket.getOutTime().getTime())) );
+            ps.setInt(6, ticket.getVip());
             return ps.execute();
         }catch (Exception ex){
             logger.error("Error fetching next available slot",ex);
@@ -121,8 +122,21 @@ public class TicketDAO {
 
     }
     
-    public final void setQueryTimeout(int seconds) {
-    	
+    public final void setQueryTimeout(Timestamp seconds) {
+        Connection con = null;
+
+            try {
+				con = dataBaseConfig.getConnection();
+	            PreparedStatement ps = con.prepareStatement(DBConstants.TEST_UPDATE_TICKET);
+	            ps.setTimestamp(2, seconds);
+			} catch (ClassNotFoundException e) {
+			
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	
     }
 
