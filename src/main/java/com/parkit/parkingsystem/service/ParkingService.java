@@ -133,7 +133,8 @@ public class ParkingService {
 				parkingSpotDAO.updateParking(parkingSpot);
 				System.out.println("Please pay the parking fare:" + ticket.getPrice());
 				System.out.println("Recorded out-time for vehicle number:" + ticket.getVehicleRegNumber() + " is:" + outTime + "ID : " + ticket.getId());
-			}else{
+//					if(ticketDAO.occurence(getVehicleRegNumber()){}
+//			}else{
 				System.out.println("Unable to update ticket information. Error occurred");
 			}
 		}catch(Exception e){
